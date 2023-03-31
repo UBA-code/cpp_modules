@@ -8,18 +8,17 @@ Fixed::Fixed()
 }
 
 // copy constructor
-Fixed::Fixed(const Fixed& exist)
+Fixed::Fixed(const Fixed &exist)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = exist;
 	// this->fixedPoint = exist.fixedPoint;
 }
 
-
 //* operators implementetion
 
 //? copy assigment operator, obj1 = obj2
-Fixed& Fixed::operator=(const Fixed& exist)
+Fixed &Fixed::operator=(const Fixed &exist)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &exist)
@@ -27,21 +26,21 @@ Fixed& Fixed::operator=(const Fixed& exist)
 	return (*this);
 }
 
-std::ostream& operator<<(std::ostream& os, const Fixed& obj)
+std::ostream &operator<<(std::ostream &os, const Fixed &obj)
 {
 	os << (float)obj.fixedPoint / getPower(2, 8);
-    return os;
+	return os;
 }
 
 //? prefix
-Fixed&	Fixed::operator++()
+Fixed &Fixed::operator++()
 {
 	++this->fixedPoint;
 	return (*this);
 }
 
 //? postfix
-Fixed	Fixed::operator++(int n)
+Fixed Fixed::operator++(int n)
 {
 	Fixed *old = new Fixed(*this);
 	this->fixedPoint++;
@@ -49,7 +48,7 @@ Fixed	Fixed::operator++(int n)
 }
 
 //? prefix
-Fixed&	Fixed::operator--()
+Fixed &Fixed::operator--()
 {
 	Fixed *old = new Fixed(*this);
 	this->fixedPoint++;
@@ -57,64 +56,66 @@ Fixed&	Fixed::operator--()
 }
 
 //? postfix
-Fixed	Fixed::operator--(int n)
+Fixed Fixed::operator--(int n)
 {
 	--this->fixedPoint;
 	return (*this);
 }
 
-
 //! value of fixed-point number and not value
-bool	Fixed::operator>(const Fixed& obj) const
+bool Fixed::operator>(const Fixed &obj) const
 {
-	return (this->fixedPoint > obj.fixedPoint);
+	return (this->toFloat() > obj.toFloat());
 }
 
-bool	Fixed::operator<(const Fixed& obj) const
+bool Fixed::operator<(const Fixed &obj) const
 {
-	return (this->fixedPoint < obj.fixedPoint);
+	return (this->toFloat() < obj.toFloat());
 }
 
-bool	Fixed::operator>=(const Fixed& obj) const
+bool Fixed::operator>=(const Fixed &obj) const
 {
-	return (this->fixedPoint >= obj.fixedPoint);
+	return (this->toFloat() >= obj.toFloat());
 }
 
-bool	Fixed::operator<=(const Fixed& obj) const
+bool Fixed::operator<=(const Fixed &obj) const
 {
-	return (this->fixedPoint <= obj.fixedPoint);
+	return (this->toFloat() >= obj.toFloat());
 }
 
-bool	Fixed::operator==(const Fixed& obj) const
+bool Fixed::operator==(const Fixed &obj) const
 {
-	return (this->fixedPoint == obj.fixedPoint);
+	return (this->toFloat() == obj.toFloat());
 }
 
-bool	Fixed::operator!=(const Fixed& obj) const
+bool Fixed::operator!=(const Fixed &obj) const
 {
-	return (this->fixedPoint != obj.fixedPoint);
+	return (this->toFloat() != obj.toFloat());
 }
 
-float	Fixed::operator+(const Fixed& obj) const
+Fixed Fixed::operator+(const Fixed &obj) const
 {
-	return (this->fixedPoint + obj.fixedPoint);
+	Fixed finalObj = this->toFloat() + obj.toFloat();
+	return (finalObj);
 }
 
-float	Fixed::operator-(const Fixed& obj) const
+Fixed Fixed::operator-(const Fixed &obj) const
 {
-	return (this->fixedPoint - obj.fixedPoint);
+	Fixed finalObj(this->toFloat() - obj.toFloat());
+	return (finalObj);
 }
 
-Fixed	Fixed::operator*(const Fixed& obj) const
+Fixed Fixed::operator*(const Fixed &obj) const
 {
-	return (Fixed((float)(this->toFloat() * obj.toFloat())));
+	Fixed finalObj(this->toFloat() * obj.toFloat());
+	return (finalObj);
 }
 
-float	Fixed::operator/(const Fixed& obj) const
+Fixed Fixed::operator/(const Fixed &obj) const
 {
-	return ((this->fixedPoint / obj.fixedPoint));
+	Fixed finalObj(this->toFloat() / obj.toFloat());
+	return (obj);
 }
-
 
 // destructor
 Fixed::~Fixed()
@@ -122,13 +123,13 @@ Fixed::~Fixed()
 	std::cout << "Destructor called" << std::endl;
 }
 
-int		Fixed::getRawBits(void) const
+int Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
 	return (this->fixedPoint);
 }
 
-void	Fixed::setRawBits(int const raw)
+void Fixed::setRawBits(int const raw)
 {
 	std::cout << "setRawBits member function called" << std::endl;
 	this->fixedPoint = raw;
@@ -155,35 +156,41 @@ Fixed::Fixed(const int n)
 Fixed::Fixed(const float n)
 {
 	std::cout << "Float constructor called" << std::endl;
-	float	shifted = n * (float)getPower(2, this->fractionalBits);
-	int		fixed = (int)roundf(shifted);
+	float shifted = n * (float)getPower(2, this->fractionalBits);
+	int fixed = (int)roundf(shifted);
 	this->fixedPoint = fixed;
 }
 
-float	Fixed::toFloat( void ) const{
+float Fixed::toFloat(void) const
+{
 	return ((float)this->fixedPoint / getPower(2, this->fractionalBits));
 };
 
-int		Fixed::toInt( void ) const{
+int Fixed::toInt(void) const
+{
 	return ((int)(this->fixedPoint) >> this->fractionalBits); // we dicard the fractional bits
 };
 
-float Fixed::min(Fixed &fixed1, Fixed &fixed2) //! prototype need check
+Fixed &Fixed::min(Fixed &fixed1, Fixed &fixed2)
 {
-	return (fixed1.toFloat() < fixed2.toFloat() ? fixed1.toFloat() : fixed2.toFloat());
+	Fixed &obj = fixed1.toFloat() > fixed2.toFloat() ? fixed1 : fixed2;
+	return (obj);
 }
 
-float Fixed::max(Fixed &fixed1, Fixed &fixed2) //! prototype need check
+Fixed &Fixed::max(Fixed &fixed1, Fixed &fixed2)
 {
-	return (fixed1.toFloat() > fixed2.toFloat() ? fixed1.toFloat() : fixed2.toFloat());
+	Fixed &obj = fixed1.toFloat() > fixed2.toFloat() ? fixed1 : fixed2;
+	return (obj);
 }
 
-float Fixed::min(const Fixed &fixed1, const Fixed &fixed2) //! prototype need check
+const Fixed &Fixed::min(const Fixed &fixed1, const Fixed &fixed2)
 {
-	return (fixed1.toFloat() < fixed2.toFloat() ? fixed1.toFloat() : fixed2.toFloat());
+	const Fixed &obj = fixed1.toFloat() < fixed2.toFloat() ? fixed1 : fixed2;
+	return (obj);
 }
 
-float Fixed::max(const Fixed &fixed1, const Fixed &fixed2) //! prototype need check
+const Fixed &Fixed::max(const Fixed &fixed1, const Fixed &fixed2)
 {
-	return (fixed1.toFloat() > fixed2.toFloat() ? fixed1.toFloat() : fixed2.toFloat());
+	const Fixed &obj = fixed1.toFloat() > fixed2.toFloat() ? fixed1 : fixed2;
+	return (obj);
 }

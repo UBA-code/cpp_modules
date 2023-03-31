@@ -1,18 +1,19 @@
 #include "HumanA.hpp"
 
-void	HumanA::attack()
+void HumanA::attack()
 {
 	if (this->weapon->getType().empty())
 	{
 		std::cerr << "Error\nthere's no weapon" << std::endl;
-		return ;
+		return;
 	}
-	std::cout << this->name 
-	<< " attacks with their " 
-	<< this->weapon->getType() << std::endl;
+	std::cout << this->name
+			  << " attacks with their "
+			  << this->weapon->getType() << std::endl;
 }
 
-HumanA::HumanA(std::string str, Weapon& sla7){
+HumanA::HumanA(std::string str, Weapon &sla7)
+{
 	this->weapon = &sla7;
 	this->name = str;
 };

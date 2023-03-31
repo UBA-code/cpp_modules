@@ -22,19 +22,19 @@ class Fixed{
 		bool	operator<=(const Fixed& obj) const;
 		bool	operator==(const Fixed& obj) const;
 		bool	operator!=(const Fixed& obj) const;
-		float	operator+(const Fixed& obj) const;
-		float	operator-(const Fixed& obj) const;
+		Fixed	operator+(const Fixed& obj) const;
+		Fixed	operator-(const Fixed& obj) const;
 		Fixed	operator*(const Fixed& obj) const;
-		float	operator/(const Fixed& obj) const;
+		Fixed	operator/(const Fixed& obj) const;
 		~Fixed	();
 		int		getRawBits( void ) const;
 		void	setRawBits( int const raw );
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
-		static float min(Fixed &fixed1, Fixed &fixed2);
-		static float min(const Fixed &fixed1, const Fixed &fixed2);
-		static float max(Fixed &fixed1, Fixed &fixed2);
-		static float max(const Fixed &fixed1, const Fixed &fixed2);
+		static Fixed& min(Fixed &fixed1, Fixed &fixed2);
+		static const Fixed& min(const Fixed &fixed1, const Fixed &fixed2);
+		static Fixed& max(Fixed &fixed1, Fixed &fixed2);
+		static const Fixed& max(const Fixed &fixed1, const Fixed &fixed2);
 	private:
 		int fixedPoint;
 		static const int fractionalBits = 8;

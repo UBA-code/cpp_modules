@@ -6,8 +6,8 @@ void HumanB::attack()
 	if (this->weapon)
 		sla7 = this->weapon->getType();
 	std::cout << this->name
-	<< " attacks with their "
-	<< sla7 << std::endl;
+			  << " attacks with their "
+			  << sla7 << std::endl;
 }
 
 void HumanB::setWeapon(Weapon &sla7)

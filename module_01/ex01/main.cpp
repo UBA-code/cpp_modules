@@ -3,7 +3,6 @@
 
 void test()
 {
-	
 }
 
 int main()
