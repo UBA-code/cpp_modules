@@ -1,7 +1,7 @@
-SRCS = main.cpp PhoneBook.cpp Contact.cpp
+SRCS = main.cpp Fixed.cpp
 OBG = $(SRCS:.cpp=.o)
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = PhoneBook
+NAME = Orthodox
 CC = c++
 all: $(NAME)
 

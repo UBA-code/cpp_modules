@@ -1,7 +1,7 @@
-SRCS = main.cpp PhoneBook.cpp Contact.cpp
+SRCS = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
 OBG = $(SRCS:.cpp=.o)
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = PhoneBook
+NAME = BraiiiiiiinnnzzzZ
 CC = c++
 all: $(NAME)
 

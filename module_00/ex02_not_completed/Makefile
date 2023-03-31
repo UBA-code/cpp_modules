@@ -1,6 +1,6 @@
-SRCS = main.cpp PhoneBook.cpp Contact.cpp
+SRCS = test.cpp Account.cpp
 OBG = $(SRCS:.cpp=.o)
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 NAME = PhoneBook
 CC = c++
 all: $(NAME)

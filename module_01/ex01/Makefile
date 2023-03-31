@@ -1,7 +1,7 @@
-SRCS = main.cpp PhoneBook.cpp Contact.cpp
+SRCS = main.cpp Zombie.cpp ZombieHorde.cpp
 OBG = $(SRCS:.cpp=.o)
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = PhoneBook
+NAME = ZombieHorde
 CC = c++
 all: $(NAME)
 
