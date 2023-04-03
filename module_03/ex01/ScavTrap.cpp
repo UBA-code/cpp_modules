@@ -1,0 +1,50 @@
+#include "ScavTrap.hpp"
+
+ScavTrap::ScavTrap()
+{
+	std::cout << "ScavTrap Constructor called" << std::endl;
+	this->HitPoint = 100;
+	this->EnergyPoint = 50;
+	this->AttackDamage = 20;
+}
+
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+{
+	std::cout << "ScavTrap Constructor called" << std::endl;
+}
+
+ScavTrap::ScavTrap(const ScavTrap& obj) : ClapTrap(obj)
+{
+	std::cout << "ScavTrap copy Constructor called" << std::endl;
+};
+
+ScavTrap& ScavTrap::operator=(const ScavTrap& obj)
+{
+	ClapTrap::operator=(obj);
+	std::cout << "ScavTrap Copy Assigment Operator called" << std::endl;
+	return (*this);
+};
+
+ScavTrap::~ScavTrap()
+{
+	std::cout << "ScavTrap Destructor called" << std::endl;
+}
+
+void ScavTrap::attack(const std::string& target)
+{
+	std::cout << "ScavTrap Attacking: ";
+	ClapTrap::attack(target);
+}
+
+void ScavTrap::guardGate()
+{
+	std::cout << this->name << " is now in Gate keeper mode" << std::endl;
+}
+
+void ScavTrap::getValues()
+{
+	std::cout << this->name << std::endl;
+	std::cout << this->HitPoint << std::endl;
+	std::cout << this->EnergyPoint << std::endl;
+	std::cout << this->AttackDamage << std::endl;
+}
