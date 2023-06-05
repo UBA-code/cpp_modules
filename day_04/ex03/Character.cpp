@@ -43,6 +43,8 @@ std::string const& Character::getName() const
 
 void Character::equip(AMateria* m)
 {
+	if (!m)
+		return ;
 	int i;
 	for (i = 0; i < 4; i++)
 	{
@@ -58,7 +60,7 @@ void Character::equip(AMateria* m)
 
 void Character::unequip(int idx)
 {
-	if (idx > 3)
+	if (idx > 3 || idx < 0)
 		return (std::cerr << "out of range\n", (void)0);
 	if (!this->slots[idx])
 		return (std::cerr << "empty place\n", (void)0);
@@ -68,6 +70,8 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter& target)
 {
-	if (this->slots[idx])
+	if (idx < 4 && idx >= 0 && this->slots[idx])
 		this->slots[idx]->use(target);
+	else
+		std::cerr << "empty place\n";
 }

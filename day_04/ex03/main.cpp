@@ -19,11 +19,28 @@ int main()
 		me->equip(tmp);
 		tmp = src->createMateria("cure");
 		me->equip(tmp);
+		me->equip(tmp);
+		me->equip(tmp);
+		me->equip(tmp);
+		me->equip(tmp);
+		me->equip(tmp);
+		me->equip(tmp);
+		me->equip(tmp);
+		me->equip(tmp);
 
 		ICharacter *bob = new Character("bob");
 
 		me->use(0, *bob);
 		me->use(1, *bob);
+		me->use(2, *bob);
+		me->use(3, *bob);
+		me->use(4, *bob);
+		me->use(5, *bob);
+		me->use(6, *bob);
+		me->use(7, *bob);
+		me->use(8, *bob);
+		me->use(9, *bob);
+		me->use(10, *bob);
 
 		delete bob;
 		delete me;
