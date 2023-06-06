@@ -27,6 +27,7 @@ Character& Character::operator=(const Character& obj)
 	// std::cout << "Character copy assigment called\n";
 	if (this != &obj)
 	{
+		this->name = obj.name;
 		for (int i = 0; i < 4; i++)
 		{
 			if (this->slots[i])
