@@ -17,6 +17,8 @@ Character::Character(std::string name) : name(name)
 Character::Character(const Character& obj)
 {
 	// std::cout << "Character copy constructor called\n";
+	for (int i = 0; i < 4; i++)
+			this->slots[i] = 0;
 	*this = obj;
 }
 
@@ -26,13 +28,24 @@ Character& Character::operator=(const Character& obj)
 	if (this != &obj)
 	{
 		for (int i = 0; i < 4; i++)
-			this->slots[i] = obj.slots[i]->clone();
+		{
+			if (this->slots[i])
+			{
+				delete this->slots[i];
+				this->slots[i] = 0;
+			}
+			if (obj.slots[i])
+				this->slots[i] = obj.slots[i]->clone();
+		}
 	}
 	return (*this);
 }
 
 Character::~Character()
 {
+	for (int i = 0; i < 4; i++)
+		if (this->slots[i])
+			delete this->slots[i];
 	// std::cout << "Character destructor called\n";
 }
 
@@ -43,14 +56,12 @@ std::string const& Character::getName() const
 
 void Character::equip(AMateria* m)
 {
-	if (!m)
-		return ;
 	int i;
 	for (i = 0; i < 4; i++)
 	{
 		if (!this->slots[i])
 		{
-			this->slots[i] = m->clone();
+			this->slots[i] = m;
 			return ;
 		}
 	}
@@ -64,7 +75,6 @@ void Character::unequip(int idx)
 		return (std::cerr << "out of range\n", (void)0);
 	if (!this->slots[idx])
 		return (std::cerr << "empty place\n", (void)0);
-	delete (this->slots[idx]);
 	this->slots[idx] = 0;
 }
 
@@ -75,3 +85,9 @@ void Character::use(int idx, ICharacter& target)
 	else
 		std::cerr << "empty place\n";
 }
+
+AMateria* Character::getMateriaFromInventory(int idx)
+{
+	return (this->slots[idx]);
+}
+
