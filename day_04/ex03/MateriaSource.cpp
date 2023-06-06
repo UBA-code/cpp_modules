@@ -20,6 +20,8 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& obj)
 	if (this != &obj)
 	{
 		for (int i = 0; i < 4; i++)
+				this->slots[i] = 0;
+		for (int i = 0; i < 4; i++)
 		{
 			if (this->slots[i])
 			{

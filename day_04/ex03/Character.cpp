@@ -22,11 +22,13 @@ Character::Character(const Character& obj)
 	*this = obj;
 }
 
-Character& Character::operator=(const Character& obj)
+Character& Character::operator=(const Character &obj)
 {
 	// std::cout << "Character copy assigment called\n";
 	if (this != &obj)
 	{
+		for (int i = 0; i < 4; i++)
+				this->slots[i] = 0;
 		this->name = obj.name;
 		for (int i = 0; i < 4; i++)
 		{
@@ -86,9 +88,3 @@ void Character::use(int idx, ICharacter& target)
 	else
 		std::cerr << "empty place\n";
 }
-
-AMateria* Character::getMateriaFromInventory(int idx)
-{
-	return (this->slots[idx]);
-}
-
