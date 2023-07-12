@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : _name("default"), _grade(1) {}
 
@@ -21,12 +21,12 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &obj)
 
 Bureaucrat::~Bureaucrat() {}
 
-std::string Bureaucrat::getName()
+std::string Bureaucrat::getName() const
 {
 	return (this->_name);
 }
 
-int Bureaucrat::getGrade()
+int Bureaucrat::getGrade() const
 {
 	return (this->_grade);
 }
@@ -53,7 +53,7 @@ void Bureaucrat::checkGrade()
 		throw(Bureaucrat::GradeTooHighException());
 }
 
-void Bureaucrat::signForm(Form& obj)
+void Bureaucrat::signForm(AForm& obj)
 {
 	try {
 		obj.beSigned(*this);
@@ -69,4 +69,11 @@ std::ostream& operator<<(std::ostream &out, Bureaucrat& obj)
 {
 	out << obj.getName() << ", bureaucrat grade " << obj.getGrade() << "\n";
 	return (out);
+}
+
+void Bureaucrat::executeForm(AForm const & form)
+{
+	// std::string err = this->getName() + "";
+	if (!form.getSigned() || !(this->getGrade() < form.getGradeExec()))
+		throw((this->getName()) + " couldn't execute form\n");
 }

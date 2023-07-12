@@ -1,21 +1,21 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form()
+AForm::AForm()
 : _name("Default"), _signed(0), _gradeExec(1), _gradeSign(1){}
 
-Form::Form(std::string name, int gradeSign, int gradeExec)
+AForm::AForm(std::string name, int gradeSign, int gradeExec)
 	: _name(name), _signed(0), _gradeExec(gradeExec), _gradeSign(gradeSign)
 {
 	this->checkGrade();
 }
 
-Form::Form(Form& obj)
+AForm::AForm(AForm& obj)
 : _name(obj._name), _signed(0), _gradeExec(obj._gradeExec), _gradeSign(obj._gradeSign)
 {
 	this->checkGrade();
 }
 
-Form& Form::operator=(Form& obj)
+AForm& AForm::operator=(AForm& obj)
 {
 	if (this != &obj)
 		this->_signed = obj._signed;
@@ -23,45 +23,45 @@ Form& Form::operator=(Form& obj)
 	return (*this);
 }
 
-Form::~Form(){}
+AForm::~AForm(){};
 
-void Form::checkGrade()
+void AForm::checkGrade()
 {
 	if (this->_gradeExec > 150 || this->_gradeSign > 150)
-		throw(Form::GradeTooLowException());
+		throw(AForm::GradeTooLowException());
 	else if (this->_gradeExec < 1 || this->_gradeSign < 1)
-		throw(Form::GradeTooHighException());
+		throw(AForm::GradeTooHighException());
 }
 
-std::string Form::getName()
+std::string AForm::getName() const
 {
 	return (this->_name);
 }
 
-bool Form::getSigned()
+bool AForm::getSigned() const
 {
 	return (this->_signed);
 }
 
-int Form::getGradeExec()
+int AForm::getGradeExec() const
 {
 	return (this->_gradeExec);
 }
 
-int Form::getGradeSign()
+int AForm::getGradeSign() const
 {
 	return (this->_gradeSign);
 }
 
-void	Form::beSigned(Bureaucrat& obj)
+void	AForm::beSigned(Bureaucrat& obj)
 {
-	if (this->getGradeSign() <= obj.getGrade())
+	if (obj.getGrade() <= this->getGradeSign())
 		this->_signed = 1;
 	else
 		throw (obj.getName() + " grade low than " + this->_name + "\n");
 }
 
-std::ostream& operator<<(std::ostream& out, Form& o)
+std::ostream& operator<<(std::ostream& out, AForm& o)
 {
 	out << "Name: " << o.getName() << "\n";
 	out << "is Signed ? " << (o.getSigned() ? "Yes" : "No") << "\n";
