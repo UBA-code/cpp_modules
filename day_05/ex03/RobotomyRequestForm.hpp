@@ -11,4 +11,5 @@ class RobotomyRequestForm : public AForm {
 		RobotomyRequestForm& operator=(RobotomyRequestForm& obj);
 		~RobotomyRequestForm();
 		void execute(Bureaucrat const & executor);
+		AForm*	clone();
 };

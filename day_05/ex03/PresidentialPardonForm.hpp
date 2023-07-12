@@ -11,4 +11,5 @@ class PresidentialPardonForm : public AForm{
 		PresidentialPardonForm& operator=(PresidentialPardonForm& obj);
 		~PresidentialPardonForm();
 		void execute(Bureaucrat const & executor);
+		AForm*	clone();
 };

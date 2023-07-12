@@ -18,6 +18,11 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(PresidentialPardonForm
 
 PresidentialPardonForm::~PresidentialPardonForm(){}
 
+AForm*	PresidentialPardonForm::clone()
+{
+	return (new PresidentialPardonForm(*this));
+}
+
 void PresidentialPardonForm::execute(Bureaucrat const & executor)
 {
 	if (!this->getSigned() || !(executor.getGrade() < this->getGradeExec()))

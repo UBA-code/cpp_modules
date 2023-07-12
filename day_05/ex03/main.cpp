@@ -3,6 +3,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 
 void	test1()
@@ -100,8 +101,18 @@ void	test3()
 
 int main ()
 {
-	test1();
-	test2();
-	test3();
+	try {
+		Intern l;
+		AForm *x = l.makeForm("Shrubbery Creation", "UBA");
+
+		std::cout << x->getName() << "\n";
+	}
+	catch (std::exception& err)
+	{
+		std::cerr << "error: " << err.what();
+	}
+	// test1();
+	// test2();
+	// test3();
 	return (0);
 }

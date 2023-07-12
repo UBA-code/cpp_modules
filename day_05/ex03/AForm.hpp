@@ -29,7 +29,8 @@ class AForm {
 		int			getGradeExec() const;
 		int			getGradeSign() const;
 		void		beSigned(Bureaucrat& obj);
-		void execute(Bureaucrat const & executor);
+		void		execute(Bureaucrat const & executor);
+		virtual		AForm*	clone();
 };
 
 std::ostream& operator<<(std::ostream& out, AForm& o);

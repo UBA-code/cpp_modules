@@ -23,12 +23,16 @@ std::string ShrubberyCreationForm::getTarget() const{
 	return (this->_target);
 }
 
+AForm*	ShrubberyCreationForm::clone()
+{
+	return (new ShrubberyCreationForm(*this));
+}
 
 void ShrubberyCreationForm::execute(Bureaucrat const & executor)
 {
 	if (!this->getSigned() || !(executor.getGrade() < this->getGradeExec()))
 		throw ("The Form is not signed OR the grade is not high enough\n");
-	std::ofstream out(_target + "_shrubbery");
+	std::ofstream out("_shrubbery");
 	out << "                                                         .\n\
                                               .         ;  \n\
                  .              .              ;%     ;;   \n\

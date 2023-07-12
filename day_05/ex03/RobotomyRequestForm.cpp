@@ -18,6 +18,11 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(RobotomyRequestForm& obj)
 
 RobotomyRequestForm::~RobotomyRequestForm(){}
 
+AForm*	RobotomyRequestForm::clone()
+{
+	return (new RobotomyRequestForm(*this));
+}
+
 void RobotomyRequestForm::execute(Bureaucrat const & executor)
 {
 	if (!this->getSigned() || !(executor.getGrade() < this->getGradeExec()))

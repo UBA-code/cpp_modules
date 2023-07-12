@@ -24,6 +24,12 @@ AForm& AForm::operator=(AForm& obj)
 }
 
 AForm::~AForm(){};
+
+AForm* AForm::clone()
+{
+	return (0);
+}
+
 void AForm::checkGrade()
 {
 	if (this->_gradeExec > 150 || this->_gradeSign > 150)
