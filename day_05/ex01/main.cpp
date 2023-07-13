@@ -11,9 +11,9 @@ void	test1()
 		try {
 			o.beSigned(b);
 		}
-		catch (std::string& err)
+		catch (std::exception & err)
 		{
-			std::cerr << "error: " << err;
+			std::cerr << "error: " << err.what();
 		}
 		std::cout << o;
 		b.signForm(o);
@@ -34,9 +34,9 @@ void	test2()
 		try {
 			o.beSigned(b);
 		}
-		catch (std::string& err)
+		catch (std::exception & err)
 		{
-			std::cerr << "error: " << err;
+			std::cerr << "error: " << err.what();
 		}
 		std::cout << o;
 		b.signForm(o);
@@ -57,9 +57,9 @@ void	test3()
 		try {
 			o.beSigned(b);
 		}
-		catch (std::string& err)
+		catch (std::exception & err)
 		{
-			std::cerr << "error: " << err;
+			std::cerr << "error: " << err.what();
 		}
 		std::cout << o;
 		b.signForm(o);

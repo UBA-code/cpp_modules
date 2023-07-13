@@ -30,8 +30,10 @@ AForm*	ShrubberyCreationForm::clone()
 
 void ShrubberyCreationForm::execute(Bureaucrat const & executor)
 {
-	if (!this->getSigned() || !(executor.getGrade() < this->getGradeExec()))
-		throw ("The Form is not signed OR the grade is not high enough\n");
+	if (!this->getSigned())
+		throw (AForm::notSigned());
+	if (!(executor.getGrade() < this->getGradeExec()))
+		throw (AForm::GradeTooLowException());
 	std::ofstream out("_shrubbery");
 	out << "                                                         .\n\
                                               .         ;  \n\

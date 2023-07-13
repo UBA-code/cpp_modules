@@ -59,9 +59,9 @@ void Bureaucrat::signForm(AForm& obj)
 		obj.beSigned(*this);
 		std::cout << this->_name << " signed " << obj.getName() << "\n";
 	}
-	catch (std::string err)
+	catch (std::exception &err)
 	{
-		std::cerr << this->_name << " couldn’t sign " << obj.getName() << " because " << err;
+		std::cerr << this->_name << " couldn’t sign " << obj.getName() << " because " << err.what();
 	}
 }
 
@@ -73,7 +73,9 @@ std::ostream& operator<<(std::ostream &out, Bureaucrat& obj)
 
 void Bureaucrat::executeForm(AForm const & form)
 {
-	// std::string err = this->getName() + "";
-	if (!form.getSigned() || !(this->getGrade() < form.getGradeExec()))
-		throw((this->getName()) + " couldn't execute form\n");
+	if (!form.getSigned())
+		throw (AForm::notSigned());
+	if (!(this->getGrade() < form.getGradeExec()))
+		throw (AForm::GradeTooLowException());
+	std::cout << this->_name << " executed " << form.getName() << "\n";
 }

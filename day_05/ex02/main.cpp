@@ -30,9 +30,6 @@ void	test1()
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
-	catch (std::string err) {
-		std::cout << "Error: " << err << std::endl;
-	}
 	std::cout << "\033[0;31m<====\ttest 1 ended\t====>\n\n\033[0;37m";
 }
 
@@ -61,9 +58,6 @@ void	test2()
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
-	catch (std::string err) {
-		std::cout << "Error: " << err << std::endl;
-	}
 	std::cout << " \033[0;32m<====\ttest 2 ended\t====>\n\n\033[0;37m";
 }
 
@@ -91,9 +85,6 @@ void	test3()
 	}
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
-	}
-	catch (std::string err) {
-		std::cout << "Error: " << err << std::endl;
 	}
 	std::cout << "\033[0;33m<====\ttest 3 ended\t====>\n\n\033[0;37m";
 }

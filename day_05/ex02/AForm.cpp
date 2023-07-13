@@ -58,7 +58,7 @@ void	AForm::beSigned(Bureaucrat& obj)
 	if (obj.getGrade() <= this->getGradeSign())
 		this->_signed = 1;
 	else
-		throw (obj.getName() + " grade low than " + this->_name + "\n");
+		throw (AForm::GradeTooLowException());
 }
 
 std::ostream& operator<<(std::ostream& out, AForm& o)

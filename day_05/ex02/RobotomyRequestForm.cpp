@@ -20,9 +20,13 @@ RobotomyRequestForm::~RobotomyRequestForm(){}
 
 void RobotomyRequestForm::execute(Bureaucrat const & executor)
 {
-	if (!this->getSigned() || !(executor.getGrade() < this->getGradeExec()))
-		throw ("the robotomy failed\n");
-	std::cout << this->getName() << " MAKE TOOOOOOOO MUCH NOISES !!!!!!!!!!\n";
-	std::cout << this->_target << " has been robotomized \
-	successfully 50% of the tim\n";
+	if (!this->getSigned())
+		throw (AForm::notSigned());
+	if (!(executor.getGrade() < this->getGradeExec()))
+		throw (AForm::GradeTooLowException());
+	static int i = 0;
+	if (i % 2 == 0)
+		std::cout << "BRAAAA " << this->_target << " has been robotomized\n";
+	else
+		std::cout << "the robotomy failed\n";
 }

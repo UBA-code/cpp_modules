@@ -23,6 +23,10 @@ class AForm {
 			public:
 				const char* what() const throw(){return ("Form Grade Too Low\n");};
 		};
+		class notSigned : public std::exception {
+			public:
+				const char* what() const throw(){return ("Form Not Signed\n");};
+		};
 		void		checkGrade();
 		std::string	getName() const;
 		bool		getSigned() const;

@@ -25,7 +25,9 @@ AForm*	PresidentialPardonForm::clone()
 
 void PresidentialPardonForm::execute(Bureaucrat const & executor)
 {
-	if (!this->getSigned() || !(executor.getGrade() < this->getGradeExec()))
-		throw ("The Form is not signed OR the grade is not high enough");
+	if (!this->getSigned())
+		throw (AForm::notSigned());
+	if (!(executor.getGrade() < this->getGradeExec()))
+		throw (AForm::GradeTooLowException());
 	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox\n";
 }

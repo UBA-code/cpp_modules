@@ -23,13 +23,17 @@ class AForm {
 			public:
 				const char* what() const throw(){return ("Form Grade Too Low\n");};
 		};
+		class notSigned : public std::exception {
+			public:
+				const char* what() const throw(){return ("Form Not Signed\n");};
+		};
 		void		checkGrade();
 		std::string	getName() const;
 		bool		getSigned() const;
 		int			getGradeExec() const;
 		int			getGradeSign() const;
 		void		beSigned(Bureaucrat& obj);
-		void execute(Bureaucrat const & executor);
+		void		execute(Bureaucrat const & executor);
 };
 
 std::ostream& operator<<(std::ostream& out, AForm& o);
