@@ -1,5 +1,4 @@
 #include "iostream"
-#include "ScalarConverter.hpp"
 
 void	test1()
 {
@@ -26,7 +25,7 @@ int main (int ac, char **av)
 {
 	if (ac == 2)
 	{
-		ScalarConverter::convert(av[1]);
+		// ScalarConverter::convert(av[1]);
 	}
 
 	return (0);

@@ -7,10 +7,11 @@
 #include <cstdlib>
 
 class ScalarConverter {
-	public:
+	private:
 		ScalarConverter();
 		ScalarConverter(ScalarConverter& obj);
 		ScalarConverter& operator=(ScalarConverter& obj);
 		~ScalarConverter();
+	public:
 		static void	convert(std::string s);
 };
