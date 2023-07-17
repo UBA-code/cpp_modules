@@ -8,11 +8,20 @@ ScalarConverter::ScalarConverter(){
 	n_double	= 0;
 }
 
-ScalarConverter::ScalarConverter(ScalarConverter& obj){(void)obj;}
+ScalarConverter::ScalarConverter(ScalarConverter& obj){
+	*this = obj;
+}
 
 ScalarConverter& ScalarConverter::operator=(ScalarConverter& obj)
 {
-    (void)obj;
+    if (this != &obj)
+	{
+		type		= obj.type;
+		c_char		= obj.c_char;
+		n_int		= obj.n_int;
+		n_float		= obj.n_float;
+		n_double	= obj.n_double;
+	}
     return (*this);
 }
 
@@ -27,7 +36,6 @@ bool	ScalarConverter::is_char(std::string s)
 		this->c_char = s[0];
 		return (1);
 	}
-	std::cout << "not char\n";
 	return 0;
 }
 
@@ -44,7 +52,6 @@ bool	ScalarConverter::is_int(std::string s)
 		this->n_int = n;
 		return (1);
 	}
-	std::cout << "not int\n";
 	return (0);
 }
 
@@ -59,7 +66,6 @@ bool	ScalarConverter::is_float(std::string s)
 		this->n_float = n;
 		return (1);
 	}
-	std::cout << "not float\n";
 	return (0);
 }
 
@@ -74,7 +80,6 @@ bool	ScalarConverter::is_double(std::string s)
 		this->n_double = n;
 		return (1);
 	}
-	std::cout << "not double\n";
 	return (0);
 }
 
@@ -99,7 +104,7 @@ int	ScalarConverter::check_num(std::string s)
 	else if (s.find('f') < s.length() && s[s.find('f') - 1] == '.')
 		return (0);
 	else if ((s.find("+") < s.length() || s.find("-") < s.length())
-			&& (s[0] != '+' || s[0] != '-'))
+			&& (s[0] != '+' && s[0] != '-'))
 		return (0);
 	return (sign > 1 || pointCount > 1  || fCount > 1 ? 0 : 1);
 }
@@ -112,12 +117,9 @@ void	ScalarConverter::check_type(std::string s)
 	is_double(s);
 	if (type != 0 && this->check_num(s) == 0)
 		this->type = -1;
-	if (type == -1)
-	{
-		if (!s.compare("-inff") || !s.compare("+inff") || !s.compare("nan")
-			|| !s.compare("nanf") || !s.compare("+inf") || !s.compare("-inf"))
-			type = -2;
-	}
+	if (!s.compare("-inff") || !s.compare("+inff") || !s.compare("nan")
+		|| !s.compare("nanf") || !s.compare("+inf") || !s.compare("-inf"))
+		type = -2;
 }
 
 void	ScalarConverter::printChar()
@@ -126,7 +128,7 @@ void	ScalarConverter::printChar()
 		std::cout << "char: " << static_cast<char>(this->c_char) << "\n";
 	else
 		std::cout << "char: " << "Not displayable\n";
-	std::cout << std::setprecision(1);
+	std::cout << std::setprecision(1) << std::fixed;
     std::cout << "int: " << static_cast<int>(this->c_char) << "\n";
     std::cout << "float: " << static_cast<float>(this->c_char) << "f" << "\n";
     std::cout << "double: " << static_cast<double>(this->c_char) << "\n";
@@ -138,7 +140,7 @@ void	ScalarConverter::printInt()
 		std::cout << "char: " << static_cast<char>(this->n_int) << "\n";
 	else
 		std::cout << "char: " << "Not displayable\n";
-	// std::cout << std::setprecision(1);
+	std::cout << std::setprecision(1) << std::fixed;
     std::cout << "int: " << static_cast<int>(this->n_int) << "\n";
     std::cout << "float: " << static_cast<float>(this->n_int) << "f" << "\n";
     std::cout << "double: " << static_cast<double>(this->n_int) << "\n";
@@ -150,7 +152,7 @@ void	ScalarConverter::printFloat()
 		std::cout << "char: " << static_cast<char>(this->n_float) << "\n";
 	else
 		std::cout << "char: " << "Not displayable\n";
-	// std::cout << std::setprecision(1);
+	std::cout << std::setprecision(1) << std::fixed;
     std::cout << "int: " << static_cast<int>(this->n_float) << "\n";
     std::cout << "float: " << static_cast<float>(this->n_float) << "f" << "\n";
     std::cout << "double: " << static_cast<double>(this->n_float) << "\n";
@@ -162,7 +164,7 @@ void	ScalarConverter::printDoublle()
 		std::cout << "char: " << static_cast<char>(this->n_double) << "\n";
 	else
 		std::cout << "char: " << "Not displayable\n";
-	// std::cout << std::setprecision(1);
+	std::cout << std::setprecision(1) << std::fixed;
     std::cout << "int: " << static_cast<int>(this->n_double) << "\n";
     std::cout << "float: " << static_cast<float>(this->n_double) << "f" << "\n";
     std::cout << "double: " << static_cast<double>(this->n_double) << "\n";
@@ -180,8 +182,8 @@ void	ScalarConverter::literals()
 {
 	std::cout << "char: " << "impossible\n";
     std::cout << "int: " << "impossible" << "\n";
-    std::cout << "float: " << _s << "\n";
-    std::cout << "double: " << _s << "\n";
+    std::cout << "float: " << _s  << (_s.find("f") < _s.length() ? "" : "f") << "\n";
+    std::cout << "double: " << (!_s.compare("nanf") ? _s.substr(0, _s.find("f")) : _s) << "\n";
 }
 
 void ScalarConverter::print_result()

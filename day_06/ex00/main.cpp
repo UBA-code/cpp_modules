@@ -24,8 +24,6 @@ void	test3()
 
 int main (int ac, char **av)
 {
-	// float a = 5 / 0;
-	// std::cout << a << "\n";
 	if (ac == 2)
 	{
 		try {
@@ -38,8 +36,6 @@ int main (int ac, char **av)
 			std::cerr << "Error: " << err.what() << "\n";
 		}
 	}
-	// test1();
-	// test2();
-	// test3();
+
 	return (0);
 }

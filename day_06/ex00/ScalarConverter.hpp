@@ -16,12 +16,8 @@ class ScalarConverter {
 		ScalarConverter(ScalarConverter& obj);
 		ScalarConverter& operator=(ScalarConverter& obj);
 		~ScalarConverter();
-		class Impossible : public std::exception {
-			public:
-				const char* what() const throw(){return ("Impossible\n");};
-		};
-		void	print_result();
 		void	convert(std::string s);
+		void	print_result();
 		bool	is_char(std::string s);
 		bool	is_int(std::string s);
 		bool	is_float(std::string s);
