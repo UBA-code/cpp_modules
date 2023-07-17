@@ -26,7 +26,15 @@ int main (int ac, char **av)
 {
 	if (ac == 2)
 	{
-		ScalarConverter::convert(av[1]);
+		try {
+			ScalarConverter l;
+
+			l.convert(av[1]);
+		}
+		catch (std::exception &err)
+		{
+			std::cerr << "Error: " << err.what() << "\n";
+		}
 	}
 
 	return (0);

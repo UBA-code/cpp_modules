@@ -1,6 +1,6 @@
 SRCS = main.cpp ScalarConverter.cpp
 OBG = $(SRCS:.cpp=.o)
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -fsanitize=address -std=c++98
 NAME = converter
 CC = c++
 all: $(NAME)
