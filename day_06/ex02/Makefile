@@ -1,7 +1,7 @@
-SRCS = main.cpp Serializer.cpp
+SRCS = main.cpp Base.cpp
 OBG = $(SRCS:.cpp=.o)
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = Serializer
+NAME = identify
 CC = c++
 all: $(NAME)
 

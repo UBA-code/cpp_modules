@@ -2,7 +2,7 @@
 
 Serializer::Serializer(){}
 Serializer::Serializer(Serializer& obj){(void)obj;}
-Serializer& Serializer::operator=(Serializer& obj){(void)obj;return (*this)}
+Serializer& Serializer::operator=(Serializer& obj){(void)obj;return (*this);}
 
 uintptr_t Serializer::serialize(Data *ptr)
 {

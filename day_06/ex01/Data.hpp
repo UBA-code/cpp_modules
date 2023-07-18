@@ -2,5 +2,7 @@
 
 typedef struct s_data
 {
-	void*	p;
+	int	a;
+	int	b;
+	int	c;
 } Data;
