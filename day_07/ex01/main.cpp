@@ -1,69 +1,41 @@
 #include "iostream"
-#include "whatever.hpp"
+#include "iter.hpp"
 
 
 void	test1()
 {
 	std::cout << "\033[0;31m<====\ttest 1 started\t====>\n\033[0;37m";
-	int	a = 10;
-	int b = 48;
-
-	std::cout << "a = " << a << "\n";
-	std::cout << "b = " << b << "\n";
-	swap(a, b);
-	std::cout << "a = " << a << "\n";
-	std::cout << "b = " << b << "\n";
-
-
-	// compilation error
-	// int	a2 = 10;
-	// char b2 = 48;
-
-	// std::cout << "a = " << a2 << "\n";
-	// std::cout << "b = " << b2 << "\n";
-	// swap(a2, b2);
-	// std::cout << "a = " << a2 << "\n";
-	// std::cout << "b = " << b2 << "\n";
 	std::cout << "\033[0;31m<====\ttest 1 ended\t====>\n\n\033[0;37m";
 }
 
 void	test2()
 {
 	std::cout << " \033[0;32m<====\ttest 2 started\t====>\n\033[0;37m";
-	int	a = 1337;
-	int b = 42;
-
-	std::cout << "min is: " << min(a, b) << "\n";
-
-	// compilation error
-	// int	a2 = 1337;
-	// char b2 = 42;
-
-	// std::cout << "min is: " << min(a2, b2) << "\n";
 	std::cout << " \033[0;32m<====\ttest 2 ended\t====>\n\n\033[0;37m";
 }
 
 void	test3()
 {
 	std::cout << "\033[0;33m<====\ttest 3 started\t====>\n\033[0;37m";
-	int	a = 1337;
-	int b = 42;
-
-	std::cout << "max is: " << max(a, b) << "\n";
-
-	// compilation error
-	// int	a2 = 1337;
-	// char b2 = 42;
-
-	// std::cout << "max is: " << max(a2, b2) << "\n";
 	std::cout << "\033[0;33m<====\ttest 3 ended\t====>\n\n\033[0;37m";
+}
+
+void calc (std::string s)
+{
+	(s)[0] = 'X';
 }
 
 int main ()
 {
-	test1();
-	test2();
-	test3();
+	std::string arr[3] = {"Hello", "World", "UBA"};
+
+	iter(3, &arr, calc);
+	for (int i = 0; i < 3; i++)
+		std::cout << arr[i] << "\n";
+		// kk(arr[i], calc);
+	// test1();
+	// test2();
+	// test3();
 	return (0);
 }
 

@@ -1,6 +1,13 @@
 #pragma once
 
-template <typename T> void iter(T a1, T a2, T (a3)())
+template <typename len, typename T, typename Func, typename ch>
+void iter(len length, T arr, Func (func)(ch c))
 {
+	len i = 0;
 
-} 
+	while (i < length)
+	{
+		func(arr[i]);
+		i++;
+	}
+}
