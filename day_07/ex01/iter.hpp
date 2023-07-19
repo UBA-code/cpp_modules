@@ -1,13 +1,13 @@
 #pragma once
+#include "stdlib.h"
 
-template <typename len, typename T, typename Func, typename ch>
-void iter(len length, T arr, Func (func)(ch c))
+template <typename len, typename T, typename Func>
+void iter(len length, T arr[], Func (*func)(T &s))
 {
-	len i = 0;
+	len i = -1;
 
-	while (i < length)
-	{
+	if (!arr)
+		return ;
+	while (++i < length)
 		func(arr[i]);
-		i++;
-	}
 }
