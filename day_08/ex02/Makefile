@@ -1,7 +1,7 @@
 SRCS = main.cpp
 OBG = $(SRCS:.cpp=.o)
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = easyfind
+NAME = Span
 CC = c++
 all: $(NAME)
 
