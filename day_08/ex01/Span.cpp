@@ -19,6 +19,8 @@ Span& Span::operator=(Span& obj)
 	return (*this);
 }
 
+Span::~Span(){};
+
 void Span::addNumber(int n)
 {
 	if (this->arr.size() < this->size)

@@ -1,63 +1,78 @@
-#include "iostream"
-#include "Span.hpp"
+#include "MutantStack.hpp"
 #include <vector>
+#include <list>
 
 void	test1()
 {
 	std::cout << "\033[0;31m<====\ttest 1 started\t====>\n\033[0;37m";
-	try {
-		Span o;
-
-		srand((unsigned)time(0));
-		for (int i = 0; i < 10; i++)
-			o.addNumber(rand() % 100);
-		o.print();
-		std::cout << "shortest distance: " << o.shortestSpan() << "\n";
-		std::cout << "longest distance: " << o.longestSpan() << "\n";
-	}
-	catch (std::exception& err)
+	MutantStack<int> mstack;
+	mstack.push(5);
+	mstack.push(17);
+	std::cout << mstack.top() << std::endl;
+	mstack.pop();
+	std::cout << mstack.size() << std::endl;
+	mstack.push(3);
+	mstack.push(5);
+	mstack.push(737);
+	mstack.push(0);
+	MutantStack<int>::iterator it = mstack.begin();
+	MutantStack<int>::iterator ite = mstack.end();
+	++it;
+	--it;
+	while (it != ite)
 	{
-		std::cerr << err.what();
+		std::cout << *it << std::endl;
+		++it;
 	}
+	MutantStack<int> s(mstack);
 	std::cout << "\033[0;31m<====\ttest 1 ended\t====>\n\n\033[0;37m";
 }
 
 void	test2()
 {
 	std::cout << " \033[0;32m<====\ttest 2 started\t====>\n\033[0;37m";
-	try {
-		Span o;
-		std::vector<int> container;
-
-		srand((unsigned)time(0));
-		for (int i = 0; i < 12000; i++)
-			container.push_back(rand() % 12000);
-		o.addArray(container);
-		o.print();
-		std::cout << "shortest distance: " << o.shortestSpan() << "\n";
-		std::cout << "longest distance: " << o.longestSpan() << "\n";
-	}
-	catch (std::exception &err)
+	std::list<int> mstack;
+	mstack.push_front(5);
+	mstack.push_front(17);
+	std::cout << mstack.front() << std::endl;
+	mstack.pop_front();
+	std::cout << mstack.size() << std::endl;
+	mstack.push_back(3);
+	mstack.push_back(5);
+	mstack.push_back(737);
+	mstack.push_back(0);
+	std::list<int>::iterator it = mstack.begin();
+	std::list<int>::iterator ite = mstack.end();
+	++it;
+	--it;
+	while (it != ite)
 	{
-		std::cerr << err.what();
+		std::cout << *it << std::endl;
+		++it;
 	}
+	std::list<int> s(mstack);
 	std::cout << " \033[0;32m<====\ttest 2 ended\t====>\n\n\033[0;37m";
 }
 
 void	test3()
 {
 	std::cout << "\033[0;33m<====\ttest 3 started\t====>\n\033[0;37m";
-	try {
-		Span o;
+	MutantStack<std::string> mstack;
 	
-		o.print();
-		std::cout << "shortest distance: " << o.shortestSpan() << "\n";
-		std::cout << "longest distance: " << o.longestSpan() << "\n";
-	}
-	catch (std::exception &err)
-	{
-		std::cerr << err.what();
-	}
+	mstack.push("One");
+	mstack.push("Two");
+	mstack.push("three");
+	mstack.push("Four");
+	mstack.push("Five");
+	mstack.push("Six");
+	mstack.push("Seven");
+	mstack.push("Eight");
+	mstack.push("Nine");
+
+	MutantStack<std::string>::iterator itt = mstack.begin();
+	MutantStack<std::string>::iterator ittEnd = mstack.end();
+	for (; itt < ittEnd; itt++)
+		std::cout << *itt << "\n";
 	std::cout << "\033[0;33m<====\ttest 3 ended\t====>\n\n\033[0;37m";
 }
 
@@ -68,9 +83,3 @@ int main()
 	test3();
 	return (0);
 }
-
-/*
-* How srand() and rand() are related to each other?
-* - srand() sets the seed which is used by rand to generate “random” numbers. If you don’t call srand before your first call to rand, it’s as if you had called srand(1) to set the seed to one. 
-*   In short, srand() — Set Seed for rand() Function. 
-*/

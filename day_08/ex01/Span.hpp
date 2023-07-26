@@ -13,6 +13,7 @@ class Span {
 		Span(unsigned int n);
 		Span(Span& obj);
 		Span& operator=(Span& obj);
+		~Span();
 		void	addNumber(int n);
 		void	addArray(std::vector<int> &array);
 		int		shortestSpan();
