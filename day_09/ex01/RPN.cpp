@@ -1,119 +1,82 @@
 #include "RPN.hpp"
 
-int	isNum(const char *s, int check)
+void	ft_error(const std::string s)
 {
-	int	i = 0;
-	for (; s[i] && s[i] != ' '; i++)
+	std::cout << s;
+	exit (EXIT_FAILURE);
+}
+
+void	parseArray(std::string &s)
+{
+	int		operatorCount = 0;
+	int		numbersCount = 0;
+
+	for (int i = 0; i < (int)s.size(); i++)
 	{
-		if (((s[i] == '+' || s[i] == '-') && !isnumber(s[i + 1])) || !isnumber(s[i]))
-			return (0);
+		for (; i < (int)s.size() && s[i] == ' '; i++);
+		if (isdigit(s[i]) || (s[i] == '-' && isdigit(s[i + 1])))
+		{
+			numbersCount++;
+			if (s[i] == '-')
+				i++;
+		}
+		else if (isOperator(s[i]) && (s[i + 1] == ' ' || !s[i + 1]))
+			operatorCount++;
+		else
+			ft_error("Invalid syntax: " + s.substr(i) + "\n");
 	}
-	if (check && s[i] == ' ')
-		return (0);
-	return (1);
+	if (operatorCount != numbersCount - 1)
+		ft_error("the operators not equal to (numbers - 1)\n");
 }
 
-// int	operator_count(std::string &s)
-// {
-// 	int count = 0;
-// 	for (int i = 0; i < s.size(); i++)
-// 		if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/')
-// 			count++;
-// 	return (count);
-// }
-
-// int	numbers_count(std::string &s)
-// {
-// 	int count = 0;
-// 	for (int i = 0; i < s.size(); i++)
-// 	{
-// 		if ((s[i] == '+' || s[i] == '-') && isdigit(s[i]))
-// 			for (; s[i] != ' ' && ; i++);
-// 			count++;
-// 	}
-// 	return (count);
-// }
-
-// void	parseArray(std::string &s)
-// {
-// 	char	*s = strtok(const_cast<char *>(s.c_str()), " ");
-// 	int		operatorCount = 0;
-// 	int		numbersCount = 0;
-// 	while  (s)
-// 	{
-// 		if ()
-// 	}
-// }
-
-char	getNextOperator(const char *s)
-{
-	int i = 0;
-	for (; s[i]; i++)
-		if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/')
-			return (s[i]);
-	return (-1);
-}
-
-void	rpn(std::string &s)
+int	rpn(std::string &s)
 {
 	int				n1;
 	int				n2;
-	// int				tmp;
-	std::stack<int> stack;
-	char			operat;
+	std::list<int> stack;
+
+	parseArray(s);
 	for (int i = 0; i < (int)s.size(); i++)
 	{
-		std::cout << s.c_str() + i << " ===> rest of string\n";
 		for (; i < (int)s.size() && s[i] == ' '; i++);
-		if (isNum(s.c_str() + i, 0))
+		if (isdigit(s[i]) || (s[i] == '-' && isdigit(s[i + 1])))
 		{
-			std::cout << atoi(s.c_str() + i) << " pushed to stack\n";
-			stack.push(atoi(s.c_str() + i));
+			if (s[i] == '-')
+				stack.push_back(atoi(s.substr(i, 2).c_str()));
+			else
+				stack.push_back(atoi(s.substr(i, 1).c_str()));
+			if (s[i] == '-')
+				i++;
 		}
-		for (; i < (int)s.size(); i++)
-			if (((s[i] == '+' || s[i] == '-') && !isdigit(s[i + 1])) || !isnumber(s[i]))
-				break;
-		if (stack.size() >= 2)
+		else if (isOperator(s[i]))
 		{
-			operat = getNextOperator(s.c_str() + i);
-			if (operat == -1)
-				break; ;
-			switch (operat)
+			if (stack.size() < 2)
+				ft_error("Syntax error detected\n");
+			n2 = stack.back();
+			stack.pop_back();
+			n1 = stack.back();
+			stack.pop_back();
+			switch (s[i])
 			{
 				case '+':
-					n1 = stack.top();
-					stack.pop();
-					n2 = stack.top();
-					stack.pop();
-					stack.push(n2 + n1);
+					stack.push_back(n1 + n2);
 					break;
 				case '-':
-					n1 = stack.top();
-					stack.pop();
-					n2 = stack.top();
-					stack.pop();
-					stack.push(n2 - n1);
-					break;
-				case '/':
-					n1 = stack.top();
-					stack.pop();
-					n2 = stack.top();
-					stack.pop();
-					stack.push(n2 / n1);
+					stack.push_back(n1 - n2);
 					break;
 				case '*':
-					n1 = stack.top();
-					stack.pop();
-					n2 = stack.top();
-					stack.pop();
-					stack.push(n2 * n1);
+					stack.push_back(n1 * n2);
+					break;
+				case '/':
+					stack.push_back(n1 / n2);
 					break;
 				default:
 					break;
 			}
 		}
 	}
-	std::cout << stack.top() << "\n";
+	std::cout << stack.back() << "\n";
+	return (1);
 }
 
 

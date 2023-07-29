@@ -1,7 +1,10 @@
 #pragma once
 #include "iostream"
-#include "stack"
+#include "list"
 #include "cstring"
 
+
+#define isOperator(c) (c == '+' || c == '-' || c == '*' || c == '/')
 void	parseArray(std::string &s);
-void	rpn(std::string &s);
+int     rpn(std::string &s);
+

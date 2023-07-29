@@ -27,13 +27,13 @@ int main(int ac, char **av)
 {
 	if (ac == 2)
 	{
-		ac = 0;
 		std::string a;
 		a.assign(av[1]);
-		rpn(a);
+		if (!rpn(a))
+			return (EXIT_FAILURE);
 		// test1();
 		// test2();
-		// test3();}
-		return (0);
+		// test3();
 	}
+	return (0);
 }
