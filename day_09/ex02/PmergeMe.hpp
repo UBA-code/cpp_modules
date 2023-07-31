@@ -2,6 +2,7 @@
 #include "iostream"
 #include "vector"
 #include "deque"
+#include <sys/time.h>
 
 template <typename T>
 void    insertionSort(T &arr);

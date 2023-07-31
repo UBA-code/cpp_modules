@@ -59,13 +59,8 @@ T	container_sort(T o, char **av)
 	(void)o;
 	T			vec;
 
-	std::cout << "Before:\t";
     for (int i = 0; av[i]; i++)
-	{
-		std::cout << av[i] << " ";
         vec.push_back(atoi(av[i]));
-	}
-	std::cout << "\nAfter:\t";
     if (vec.size() <= 10)
         insertionSort(vec);
 	else
@@ -75,39 +70,28 @@ T	container_sort(T o, char **av)
 
 void    pMergeMe(char **av)
 {
-    time_t		start = clock(), end;
+	timeval	start, end;
 
+	gettimeofday(&start, 0);
 	std::vector<int> vec = container_sort(std::vector<int>(), av);
-	end = clock();
-	std::cout << "Time to process a range of" <<  vec.size() << " elements with std::vector : " << start << "us\n";
-	start = clock();
+	gettimeofday(&end, 0);
+
+	// * print before
+	std::cout << "Before:\t";
+	for (int i = 0; av[i]; i++)
+		std::cout << av[i] << " ";
+	std::cout << "\n";
+
+
+	// * print after
+	std::cout << "After:\t";
+	for (int i = 0; i < (int)vec.size(); i++)
+		std::cout << vec[i] << " ";
+	std::cout << "\n";
+
+	std::cout << "Time to process a range of " <<  vec.size() << " elements with std::vector\t: " << end.tv_usec << " us\n";
+	gettimeofday(&start, 0);
 	std::deque<int> deq = container_sort(std::deque<int>(), av);
-	end = clock();
-	std::cout << "Time to process a range of" <<  deq.size() << " elements with std::deque : " << start << "us\n";
-
-
-    //std::vector<int>	vec;
-    //std::deque<int>		deq;
-    //time_t				start, end;
-
-
-    //for (int i = 0; av[i]; i++)
-    //{
-    //    vec.push_back(atoi(av[i]));
-    //    deq.push_back(atoi(av[i]));
-    //}
-    //if (vec.size() <= 10)
-    //{
-    //    insertionSort(vec);
-	//	// insertionSort(deq);
-	//}
-	//else
-	//{
-    //    mergeSort(vec);
-    //    // mergeSort(deq);
-    //}
-    // std::vector<int>::iterator l = vec.begin();
-	// for (; l != vec.end();l++)
-	// 	std::cout << *l << ", ";
-	// std::cout << "\n";
+	gettimeofday(&end, 0);
+	std::cout << "Time to process a range of " <<  deq.size() << " elements with std::deque\t: " << start.tv_usec << " us\n";
 }
