@@ -89,9 +89,11 @@ void    pMergeMe(char **av)
 		std::cout << vec[i] << " ";
 	std::cout << "\n";
 
-	std::cout << "Time to process a range of " <<  vec.size() << " elements with std::vector\t: " << end.tv_usec << " us\n";
+	std::cout << "Time to process a range of " <<  vec.size()\
+	<< " elements with std::vector\t: " << ((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec) << " us\n";
 	gettimeofday(&start, 0);
 	std::deque<int> deq = container_sort(std::deque<int>(), av);
 	gettimeofday(&end, 0);
-	std::cout << "Time to process a range of " <<  deq.size() << " elements with std::deque\t: " << start.tv_usec << " us\n";
+	std::cout << "Time to process a range of " <<  deq.size() << " elements with std::deque\t: "\
+	<< ((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec) << " us\n";
 }

@@ -1,6 +1,6 @@
 SRCS = main.cpp PmergeMe.cpp
 OBG = $(SRCS:.cpp=.o)
-CPPFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3 -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = PmergeMe
 CC = c++
 all: $(NAME)

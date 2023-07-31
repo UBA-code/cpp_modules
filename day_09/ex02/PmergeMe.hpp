@@ -3,7 +3,10 @@
 #include "vector"
 #include "deque"
 #include <sys/time.h>
+#include "cstdlib"
 
+
+#define isOperator(c) (c == '+' || c == '-')
 template <typename T>
 void    insertionSort(T &arr);
 template <typename T>
