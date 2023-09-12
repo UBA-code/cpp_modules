@@ -49,7 +49,7 @@ void Bureaucrat::checkGrade()
 {
 	if (this->_grade > 150)
 		throw(Bureaucrat::GradeTooLowException());
-	else if (this->_grade > 150)
+	else if (this->_grade < 1)
 		throw(Bureaucrat::GradeTooHighException());
 }
 

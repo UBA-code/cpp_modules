@@ -33,14 +33,14 @@ int Bureaucrat::getGrade()
 void Bureaucrat::inc()
 {
 	if (this->_grade <= 1)
-		throw (GradeTooLowException());
+		throw (GradeTooHighException());
 	(this->_grade)--;
 }
 
 void Bureaucrat::dec()
 {
 	if (this->_grade >= 150)
-		throw (GradeTooHighException());
+		throw (GradeTooLowException());
 	(this->_grade)++;
 }
 

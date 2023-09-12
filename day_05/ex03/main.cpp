@@ -14,6 +14,7 @@ void	test1()
 		AForm *x = l.makeForm("Shrubbery Creation", "UBA");
 
 		std::cout << x->getName() << "\n";
+		delete x;
 	}
 	catch (std::exception& err)
 	{
@@ -30,6 +31,7 @@ void	test2()
 		AForm *x = l.makeForm("Robotomy Request", "HAHA");
 
 		std::cout << x->getName() << "\n";
+		delete x;
 	}
 	catch (std::exception& err)
 	{
@@ -46,6 +48,7 @@ void	test3()
 		AForm *x = l.makeForm("Shrubbery", "UBA");
 
 		std::cout << x->getName() << "\n";
+		delete x;
 	}
 	catch (std::exception& err)
 	{

@@ -15,14 +15,28 @@ void	test1()
 		PresidentialPardonForm form3("President");
 
 		std::cout << "\n--------------- Form 1 ( Shrubbery ) ---------------" << std::endl;
-		bureaucrat.signForm(form1);
-		bureaucrat.executeForm(form1);
+		try
+		{
+			bureaucrat.signForm(form1);
+			bureaucrat.executeForm(form1);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 		std::cout << "\n--------------- Form 2 ( Robotomy ) ---------------" << std::endl;
-		bureaucrat.signForm(form2);
-		bureaucrat.executeForm(form2);
-		bureaucrat.executeForm(form2);
-		bureaucrat.executeForm(form2);
-		bureaucrat.executeForm(form2);
+		try
+		{
+			bureaucrat.signForm(form2);
+			bureaucrat.executeForm(form2);
+			bureaucrat.executeForm(form2);
+			bureaucrat.executeForm(form2);
+			bureaucrat.executeForm(form2);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 		std::cout << "\n--------------- Form 3 ( President ) ---------------" << std::endl;
 		bureaucrat.signForm(form3);
 		bureaucrat.executeForm(form3);
@@ -43,14 +57,29 @@ void	test2()
 		PresidentialPardonForm form3("President");
 
 		std::cout << "\n--------------- Form 1 ( Shrubbery ) ---------------" << std::endl;
-		bureaucrat.signForm(form1);
-		bureaucrat.executeForm(form1);
+		try
+		{
+			bureaucrat.signForm(form1);
+			bureaucrat.executeForm(form1);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 		std::cout << "\n--------------- Form 2 ( Robotomy ) ---------------" << std::endl;
-		bureaucrat.signForm(form2);
-		bureaucrat.executeForm(form2);
-		bureaucrat.executeForm(form2);
-		bureaucrat.executeForm(form2);
-		bureaucrat.executeForm(form2);
+		try
+		{
+			bureaucrat.signForm(form2);
+			bureaucrat.executeForm(form2);
+			bureaucrat.executeForm(form2);
+			bureaucrat.executeForm(form2);
+			bureaucrat.executeForm(form2);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+		
 		std::cout << "\n--------------- Form 3 ( President ) ---------------" << std::endl;
 		bureaucrat.signForm(form3);
 		bureaucrat.executeForm(form3);
@@ -71,14 +100,29 @@ void	test3()
 		PresidentialPardonForm form3("President");
 
 		std::cout << "\n--------------- Form 1 ( Shrubbery ) ---------------" << std::endl;
-		bureaucrat.signForm(form1);
-		bureaucrat.executeForm(form1);
+		try
+		{
+			bureaucrat.signForm(form1);
+			bureaucrat.executeForm(form1);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+		
 		std::cout << "\n--------------- Form 2 ( Robotomy ) ---------------" << std::endl;
-		bureaucrat.signForm(form2);
-		bureaucrat.executeForm(form2);
-		bureaucrat.executeForm(form2);
-		bureaucrat.executeForm(form2);
-		bureaucrat.executeForm(form2);
+		try
+		{
+			bureaucrat.signForm(form2);
+			bureaucrat.executeForm(form2);
+			bureaucrat.executeForm(form2);
+			bureaucrat.executeForm(form2);
+			bureaucrat.executeForm(form2);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 		std::cout << "\n--------------- Form 3 ( President ) ---------------" << std::endl;
 		bureaucrat.signForm(form3);
 		bureaucrat.executeForm(form3);

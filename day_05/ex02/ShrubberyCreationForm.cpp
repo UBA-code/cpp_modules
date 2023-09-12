@@ -24,13 +24,18 @@ std::string ShrubberyCreationForm::getTarget() const{
 }
 
 
-void ShrubberyCreationForm::execute(Bureaucrat const & executor)
+void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
 	if (!this->getSigned())
 		throw (AForm::notSigned());
 	if (!(executor.getGrade() < this->getGradeExec()))
 		throw (AForm::GradeTooLowException());
-	std::ofstream out(_target + "_shrubbery");
+	std::ofstream out((_target + "_shrubbery").c_str());
+	if (!out.is_open())
+	{
+		std::cerr << "failed open create file\n";
+		return ;
+	}
 	out << "                                                         .\n\
                                               .         ;  \n\
                  .              .              ;%     ;;   \n\

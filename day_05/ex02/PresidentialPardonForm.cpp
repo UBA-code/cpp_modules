@@ -12,13 +12,13 @@ PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm& obj)
 PresidentialPardonForm& PresidentialPardonForm::operator=(PresidentialPardonForm& obj)
 {
 	AForm::operator=(obj);
-	obj._target = obj._target;
+	this->_target = obj._target;
 	return (*this);
 }
 
 PresidentialPardonForm::~PresidentialPardonForm(){}
 
-void PresidentialPardonForm::execute(Bureaucrat const & executor)
+void PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
 	if (!this->getSigned())
 		throw (AForm::notSigned());

@@ -49,7 +49,7 @@ void Bureaucrat::checkGrade()
 {
 	if (this->_grade > 150)
 		throw(Bureaucrat::GradeTooLowException());
-	else if (this->_grade > 150)
+	else if (this->_grade < 1)
 		throw(Bureaucrat::GradeTooHighException());
 }
 
@@ -77,5 +77,12 @@ void Bureaucrat::executeForm(AForm const & form)
 		throw (AForm::notSigned());
 	if (!(this->getGrade() < form.getGradeExec()))
 		throw (AForm::GradeTooLowException());
-	std::cout << this->_name << " executed " << form.getName() << "\n";
+	try {
+		form.execute(*this);
+		std::cout << this->_name << " executed " << form.getName() << "\n";
+	}
+	catch (const std::exception &err)
+	{
+		std::cerr << err.what() << "\n";
+	}
 }

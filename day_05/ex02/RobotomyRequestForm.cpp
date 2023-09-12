@@ -18,7 +18,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(RobotomyRequestForm& obj)
 
 RobotomyRequestForm::~RobotomyRequestForm(){}
 
-void RobotomyRequestForm::execute(Bureaucrat const & executor)
+void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
 	if (!this->getSigned())
 		throw (AForm::notSigned());
@@ -29,4 +29,5 @@ void RobotomyRequestForm::execute(Bureaucrat const & executor)
 		std::cout << "BRAAAA " << this->_target << " has been robotomized\n";
 	else
 		std::cout << "the robotomy failed\n";
+	i++;
 }

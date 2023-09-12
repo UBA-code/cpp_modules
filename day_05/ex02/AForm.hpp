@@ -27,13 +27,13 @@ class AForm {
 			public:
 				const char* what() const throw(){return ("Form Not Signed\n");};
 		};
-		void		checkGrade();
-		std::string	getName() const;
-		bool		getSigned() const;
-		int			getGradeExec() const;
-		int			getGradeSign() const;
-		void		beSigned(Bureaucrat& obj);
-		void		execute(Bureaucrat const & executor);
+		void			checkGrade();
+		std::string		getName() const;
+		bool			getSigned() const;
+		int				getGradeExec() const;
+		int				getGradeSign() const;
+		void			beSigned(Bureaucrat& obj);
+		virtual void	execute(Bureaucrat const & executor) const;
 };
 
 std::ostream& operator<<(std::ostream& out, AForm& o);

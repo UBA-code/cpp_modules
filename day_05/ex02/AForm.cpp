@@ -69,3 +69,5 @@ std::ostream& operator<<(std::ostream& out, AForm& o)
 	out << "Grade Sign " << o.getGradeSign() << "\n";
 	return (out);
 }
+
+void	AForm::execute(Bureaucrat const & executor) const {(void)executor;}
