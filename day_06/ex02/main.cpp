@@ -8,6 +8,7 @@
 
 Base* generate(void)
 {
+	srand(time(0));
 	int	ran = rand();
 	if (ran % 3 == 0)
 		return (new One());
@@ -20,6 +21,11 @@ Base* generate(void)
 
 void identify(Base* p)
 {
+	if (!p)
+	{
+		std::cerr << "Unknown Type\n";
+		return ;
+	}
 	Base* tmp;
 	tmp = dynamic_cast<One*>(p);
 	if (tmp)
@@ -63,7 +69,7 @@ void	test1()
 void	test2()
 {
 	std::cout << " \033[0;32m<====\ttest 2 started\t====>\n\033[0;37m";
-	Base* obj = new Three();
+	Base* obj = new Two();
 
 	identify(obj);
 	std::cout << " \033[0;32m<====\ttest 2 ended\t====>\n\n\033[0;37m";
@@ -72,10 +78,26 @@ void	test2()
 void	test3()
 {
 	std::cout << "\033[0;33m<====\ttest 3 started\t====>\n\033[0;37m";
-	Base* obj = new Two();
+	Base* obj = new Three();
 
 	identify(*obj);
 	std::cout << "\033[0;33m<====\ttest 3 ended\t====>\n\n\033[0;37m";
+}
+
+void	test4()
+{
+	std::cout << "\033[0;35m<====\ttest 4 started\t====>\n\033[0;37m";
+	Base* obj = generate();
+
+	identify(*obj);
+	std::cout << "\033[0;35m<====\ttest 4 ended\t====>\n\n\033[0;37m";
+}
+
+void	test5()
+{
+	std::cout << "\033[0;34m<====\ttest 5 started\t====>\n\033[0;37m";
+	identify(NULL);
+	std::cout << "\033[0;34m<====\ttest 5 ended\t====>\n\n\033[0;37m";
 }
 
 int main ()
@@ -83,5 +105,7 @@ int main ()
 	test1();
 	test2();
 	test3();
+	test4();
+	test5();
 	return (0);
 }

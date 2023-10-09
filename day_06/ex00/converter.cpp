@@ -33,8 +33,7 @@ converter::~converter(){};
 
 bool	converter::is_char(std::string s)
 {
-	if (type == -1 && s.length() == 1 && isascii(s[0]) && !std::isdigit(s[0])
-		&& s[0] != '+' && s[0] != '-')
+	if (type == -1 && s.length() == 1 && isascii(s[0]) && !std::isdigit(s[0]))
 	{
 		this->type = 0;
 		this->c_char = s[0];
@@ -47,10 +46,10 @@ bool	converter::is_int(std::string s)
 {
 	if (type == -1 && !converter::check_num(s))
 		return (0);
-	long n = atol(s.c_str());
+	long n = atoll(s.c_str());
 	if (type == -1 && s.find('.') < s.length())
 		return (0);
-	if (type == -1 && n > INT_MIN && n < INT_MAX)
+	if (type == -1 && n >= INT_MIN && n <= INT_MAX)
 	{
 		this->type = 1;
 		this->n_int = n;
@@ -64,7 +63,7 @@ bool	converter::is_float(std::string s)
 	if (type == -1 && (!converter::check_num(s) || s.find('f') > s.length()))
 		return (0);
 	double n = atof(s.c_str());
-	if (type == -1 && n > -FLT_MAX && n < FLT_MAX)
+	if (type == -1 && n > -FLT_MAX && n <= FLT_MAX)
 	{
 		this->type = 2;
 		this->n_float = n;
@@ -78,7 +77,7 @@ bool	converter::is_double(std::string s)
 	if (type == -1 && !converter::check_num(s))
 		return (0);
 	double n = atof(s.c_str());
-	if (type == -1 && n > -DBL_MAX && n < DBL_MAX)
+	if (type == -1 && n > -DBL_MAX && n <= DBL_MAX)
 	{
 		this->type = 3;
 		this->n_double = n;
@@ -103,9 +102,7 @@ int	converter::check_num(std::string s)
 		if (s[i] == 'f')
 			fCount++;
 	}
-	if (s.find('.') == s.length() - 1 || s[s.find('.') + 1] == 'f')
-		return (0);
-	else if (s.find('f') < s.length() && s[s.find('f') - 1] == '.')
+	if (s.find('.') < s.length() && !isdigit(s[s.find('.') + 1]))
 		return (0);
 	else if ((s.find("+") < s.length() || s.find("-") < s.length())
 			&& (s[0] != '+' && s[0] != '-'))
@@ -123,7 +120,10 @@ void	converter::check_type(std::string s)
 		this->type = -1;
 	if (!s.compare("-inff") || !s.compare("+inff") || !s.compare("nan")
 		|| !s.compare("nanf") || !s.compare("+inf") || !s.compare("-inf"))
+	{
+		_s = s;
 		type = -2;
+	}
 }
 
 void	converter::printChar()

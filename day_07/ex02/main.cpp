@@ -9,8 +9,7 @@ void	test1()
 		Array<std::string> l(5);
 		std::string s = "hello";
 		l.set_value(s);
-		for (size_t i = 0; i < l.size(); i++)
-			std::cout << l[i] << "\n";
+		l.print();
 	}
 	catch (std::exception &err)
 	{
@@ -26,8 +25,7 @@ void	test2()
 		Array<int> l(5);
 		int			num = 1337;
 		l.set_value(num);
-		for (size_t i = 0; i < l.size(); i++)
-			std::cout << l[i] << "\n";
+		l.print();
 	}
 	catch (std::exception &err)
 	{
@@ -40,10 +38,11 @@ void	test3()
 {
 	std::cout << "\033[0;33m<====\ttest 3 started\t====>\n\033[0;37m";
 	try {
-		Array<char> l(5);
+		const Array<char> l(5);
 		char		num = 'X';
 		l.set_value(num);
-		std::cout << l[-10] << "\n";
+		std::cout << l[1];
+		l.print();
 	}
 	catch (std::exception &err)
 	{

@@ -1,7 +1,8 @@
 #pragma once
-#include "iostream"
+#include <iostream>
 
-template <typename T> class Array {
+template <typename T>
+class Array {
 	private:
 		T		*arr;
 		size_t	n;
@@ -27,22 +28,40 @@ template <typename T> class Array {
 			return (*this);
 		};
 		~Array(){delete[] this->arr;}
-		size_t	size(){return this->n;}
+
+		// * member functions
+		size_t	size() const {return this->n;}
+
 		void	set_value(T &s)
 		{
 			for (size_t i = 0; i < this->n; i++)
 				this->arr[i] = s;
 		}
-		void	print(){
+
+		void	set_value(T &s) const
+		{
+			(void)s;
+		}
+
+		void	print() const {
 			for (size_t i = 0; i < this->n; i++)
 				std::cout << this->arr[i] << "\n";
 		};
+
 		T& operator[](size_t index)
 		{
 			if (index >= this->n)
 				throw (rangeOverflow());
 			return (this->arr[index]);
 		}
+
+		T operator[](size_t index) const
+		{
+			if (index >= this->n)
+				throw (rangeOverflow());
+			return (this->arr[index]);
+		}
+
 		class rangeOverflow : public std::exception {
 			const char* what() const throw() {
 				return ("\033[0;31mOverflow detected !\033[0;37m\n");

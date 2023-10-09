@@ -3,6 +3,7 @@ OBG = $(SRCS:.cpp=.o)
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = template
 CC = c++
+CXX = c++
 all: $(NAME)
 
 $(NAME): $(OBG)
@@ -13,6 +14,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+
 run:
 	make
 	clear

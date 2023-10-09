@@ -3,6 +3,7 @@ OBG = $(SRCS:.cpp=.o)
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = identify
 CC = c++
+CXX = c++
 all: $(NAME)
 
 $(NAME): $(OBG)
