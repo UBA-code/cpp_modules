@@ -4,13 +4,13 @@
 #include "iterator"
 #include <deque>
 
-template < typename T, class Container=std::deque<T> >
+template < class T, class Container=std::deque<T> >
 class MutantStack : public std::stack<T, Container>
 {
 	public:
 		MutantStack(){};
-		MutantStack(MutantStack& obj){*this = obj;};
-		MutantStack& operator=(MutantStack& obj){
+		MutantStack(const MutantStack& obj) : std::stack<T, Container>(obj){};
+		MutantStack& operator=(const MutantStack& obj){
 			std::stack<T, Container>::operator=(obj);
 			return (*this);
 		};

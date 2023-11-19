@@ -11,11 +11,18 @@ class Span {
 	public:
 		Span();
 		Span(unsigned int n);
-		Span(Span& obj);
-		Span& operator=(Span& obj);
+		Span(const Span& obj);
+		Span& operator=(const Span& obj);
 		~Span();
 		void	addNumber(int n);
-		void	addArray(std::vector<int> &array);
+
+		template <typename T>
+		void addArray(T begin, T end)
+		{
+			for (;begin < end && this->arr.size() < this->size; begin++)
+				(this->arr).push_back(*begin);
+		}
+
 		int		shortestSpan();
 		int		longestSpan();
 		void	print();
@@ -32,3 +39,13 @@ class Span {
 				};
 		};
 };
+
+
+
+// ! Container properties
+//	 ? Sequence
+//	 		* Elements in sequence containers are ordered in a strict linear sequence. Individual elements are accessed by their position in this sequence.
+//	 ? Dynamic array
+//	 		* Allows direct access to any element in the sequence, and provides relatively fast addition/removal of elements at the end of the sequence.
+//	 ? Allocator-aware
+//	 		* The container uses an allocator object to dynamically handle its storage needs.

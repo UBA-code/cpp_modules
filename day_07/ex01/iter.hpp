@@ -4,7 +4,7 @@
 template <typename T, typename K>
 void iter(T *arr, size_t length, void (*func)(K &s))
 {
-	size_t i = -1;
+	size_t i = 0;
 
 	if (!arr)
 		return ;

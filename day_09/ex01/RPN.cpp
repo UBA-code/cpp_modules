@@ -1,11 +1,5 @@
 #include "RPN.hpp"
 
-void	ft_error(const std::string s)
-{
-	std::cout << s;
-	exit (EXIT_FAILURE);
-}
-
 void	parseArray(std::string &s)
 {
 	int		operatorCount = 0;
@@ -23,18 +17,22 @@ void	parseArray(std::string &s)
 		else if (isOperator(s[i]) && (s[i + 1] == ' ' || !s[i + 1]))
 			operatorCount++;
 		else
-			ft_error("Invalid syntax: " + s.substr(i) + "\n");
+			throw (std::logic_error("Invalid syntax: " + s.substr(i)));
+		if ((isdigit(s[i]) || isOperator(s[i])) && s[i + 1] && std::string(" 	").find_first_of(s[i + 1]) > 2)
+			throw (std::logic_error("Invalid syntax: " + s.substr(i)));
 	}
 	if (operatorCount != numbersCount - 1)
-		ft_error("the operators not equal to (numbers - 1)\n");
+		throw (std::logic_error("the operators not equal to (numbers - 1)"));
 }
 
-int	rpn(std::string &s)
+void	rpn(std::string &s)
 {
 	int				n1;
 	int				n2;
-	std::list<int> stack;
+	std::stack<int> stack;
 
+	s.erase(0, s.find_first_not_of(" 	") > s.length() ? 0 : s.find_first_not_of(" 	"));
+	s.erase(s.find_last_not_of(" 	")> s.length() ? s.length() : s.find_last_not_of(" 	") + 1);
 	parseArray(s);
 	for (int i = 0; i < (int)s.size(); i++)
 	{
@@ -42,42 +40,38 @@ int	rpn(std::string &s)
 		if (isdigit(s[i]) || (s[i] == '-' && isdigit(s[i + 1])))
 		{
 			if (s[i] == '-')
-				stack.push_back(atoi(s.substr(i, 2).c_str()));
+				stack.push(atoi(s.substr(i, 2).c_str()));
 			else
-				stack.push_back(atoi(s.substr(i, 1).c_str()));
+				stack.push(atoi(s.substr(i, 1).c_str()));
 			if (s[i] == '-')
 				i++;
 		}
 		else if (isOperator(s[i]))
 		{
 			if (stack.size() < 2)
-				ft_error("Syntax error detected\n");
-			n2 = stack.back();
-			stack.pop_back();
-			n1 = stack.back();
-			stack.pop_back();
+				throw (std::logic_error("Syntax error detected\n"));
+			n2 = stack.top();
+			stack.pop();
+			n1 = stack.top();
+			stack.pop();
 			switch (s[i])
 			{
 				case '+':
-					stack.push_back(n1 + n2);
+					stack.push(n1 + n2);
 					break;
 				case '-':
-					stack.push_back(n1 - n2);
+					stack.push(n1 - n2);
 					break;
 				case '*':
-					stack.push_back(n1 * n2);
+					stack.push(n1 * n2);
 					break;
 				case '/':
-					stack.push_back(n1 / n2);
+					stack.push(n1 / n2);
 					break;
 				default:
 					break;
 			}
 		}
 	}
-	std::cout << stack.back() << "\n";
-	return (1);
+	std::cout << stack.top() << "\n";
 }
-
-
-//* "8 9 * 9 - 9 - 9 - 4 - 1 +"

@@ -76,10 +76,66 @@ void	test3()
 	std::cout << "\033[0;33m<====\ttest 3 ended\t====>\n\n\033[0;37m";
 }
 
+
+void subject_test()
+{
+	std::cout << "\033[0;33m<====\tsubject test started\t====>\n\033[0;37m";
+	MutantStack<int> mstack;
+	mstack.push(5);
+	mstack.push(17);
+	std::cout << mstack.top() << std::endl;
+	mstack.pop();
+	std::cout << mstack.size() << std::endl;
+	mstack.push(3);
+	mstack.push(5);
+	mstack.push(737);
+	//[...]
+	mstack.push(0);
+	MutantStack<int>::iterator it = mstack.begin();
+	MutantStack<int>::iterator ite = mstack.end();
+	++it;
+	--it;
+	while (it != ite)
+	{
+		std::cout << *it << std::endl;
+		++it;
+	}
+	std::stack<int> s(mstack);
+	std::cout << "\033[0;33m<====\tsubject test ended\t====>\n\n\033[0;37m";
+}
+
+void subject_test_list()
+{
+	std::cout << "\033[0;33m<====\tsubject test list started\t====>\n\033[0;37m";
+	std::list<int> mstack;
+	mstack.push_back(5);
+	mstack.push_back(17);
+	std::cout << mstack.back() << std::endl;
+	mstack.pop_back();
+	std::cout << mstack.size() << std::endl;
+	mstack.push_back(3);
+	mstack.push_back(5);
+	mstack.push_back(737);
+	//[...]
+	mstack.push_back(0);
+	std::list<int>::iterator it = mstack.begin();
+	std::list<int>::iterator ite = mstack.end();
+	++it;
+	--it;
+	while (it != ite)
+	{
+		std::cout << *it << std::endl;
+		++it;
+	}
+	std::cout << "\033[0;33m<====\tsubject test list ended\t====>\n\n\033[0;37m";
+}
+
 int main()
 {
 	test1();
 	test2();
 	test3();
+	subject_test();
+	subject_test_list();
 	return (0);
 }

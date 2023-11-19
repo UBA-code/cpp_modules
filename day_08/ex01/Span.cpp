@@ -1,15 +1,15 @@
 #include "Span.hpp"
 
-Span::Span() : arr(0){}
+Span::Span() : size(0) {}
 
-Span::Span(unsigned int n) : size(n){}
+Span::Span(unsigned int n) : size(n) {}
 
-Span::Span(Span& obj)
+Span::Span(const Span &obj)
 {
 	*this = obj;
 }
 
-Span& Span::operator=(Span& obj)
+Span &Span::operator=(const Span &obj)
 {
 	if (this != &obj)
 	{
@@ -23,22 +23,20 @@ Span::~Span(){};
 
 void Span::addNumber(int n)
 {
-	if (this->arr.size() < this->size)
-		this->arr.push_back(n);
-	else
-		throw (filledContainer());
+	if (this->arr.size() >= this->size)
+		throw(filledContainer());
+	this->arr.push_back(n);
 }
 
-int	Span::shortestSpan()
+int Span::shortestSpan()
 {
 	if (this->arr.size() <= 1)
-		throw (emptyContainer());
+		throw(emptyContainer());
 
-	std::vector<int>			tmp(this->arr);
-	int							shortest;
+	std::vector<int> tmp(this->arr);
+	int shortest;
 
-	// ? // sort with stable sort
-	std::stable_sort(tmp.begin(), tmp.end());
+	std::sort(tmp.begin(), tmp.end());
 
 	shortest = tmp[1] - tmp[0];
 	for (size_t i = 0; i < tmp.size(); i++)
@@ -47,11 +45,11 @@ int	Span::shortestSpan()
 	return (shortest);
 }
 
-int	Span::longestSpan()
+int Span::longestSpan()
 {
 	if (this->arr.size() <= 1)
-		throw (emptyContainer());
-	int	min;
+		throw(emptyContainer());
+	int min;
 	int max;
 
 	max = *(std::max_element(this->arr.begin(), this->arr.end()));
@@ -59,18 +57,11 @@ int	Span::longestSpan()
 	return (max - min);
 }
 
-void Span::addArray(std::vector<int> &array)
-{
-	this->arr.clear();
-	std::vector<int>::iterator itt = array.begin();
-	for (; itt < array.end(); itt++)
-		(this->arr).push_back(*itt);
-}
 void Span::print()
 {
-	std::vector<int>::iterator	itt = (this->arr).begin();
+	std::vector<int>::iterator itt = (this->arr).begin();
 
-	for (; itt < this->arr.end(); itt++)
+	for (; itt != this->arr.end(); itt++)
 	{
 		std::cout << *itt << "\n";
 	}
